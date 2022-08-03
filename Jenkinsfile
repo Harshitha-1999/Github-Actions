@@ -1,4 +1,5 @@
 @Library('jenkins-shared-library') _
+#@Library('jenkins-shared-library@feature/AKS-JAR') _
 
 pipeline {
 
@@ -26,6 +27,10 @@ pipeline {
   agent { 
     label 'platform-ff'
   }
+	
+  /*agent { 
+    label 'Jenkins_Agent1'
+  }*/
 
   /*triggers {
     pollSCM 'H/5 * * * *'
@@ -54,6 +59,7 @@ pipeline {
         }
       }
     }
+	   
     /*stage('Build, Test & SonarQube Analysis') {
     when { allOf { environment name: 'application_type', value: 'java' } }
       steps {
@@ -63,6 +69,16 @@ pipeline {
         }
       }
     } */
+	   
+     /* stage('Build, Test, Coverage and sonar') {
+      when { allOf { environment name: 'application_type', value: 'nodejs' } }
+       steps {
+        script {  
+          albBuild.npmHeadless()
+        } 
+      }
+    } */ 
+	   
     stage('SonarQube Quality Gate') {
     when { allOf { environment name: 'application_type', value: 'java' } }
       steps {
@@ -81,6 +97,16 @@ pipeline {
         }
       }
     }   
+	   
+    /*stage('Veracode nodejs Scan') {
+    when { allOf { environment name: 'application_type', value: 'nodejs' } }
+      steps {
+        script {
+          sh """tar -czvf node_modules.tar.gz node_modules"""
+          albBuild.veraCodeScannj(VeraAppid, AbortOnFail, VeraAppName)
+        }
+      }
+    }*/
 	   
     stage('maven build') {
     steps {
