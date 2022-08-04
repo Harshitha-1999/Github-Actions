@@ -1,7 +1,7 @@
 # Github-Actions
 CI CD workflows
 
-Github Actions
+Github Actions -- Here we have Action repos like, Check out, setup node etc
 https://github.com/actions
 ![image](https://user-images.githubusercontent.com/55782294/182794631-ef7ae583-b91f-46d9-a4c4-5b42aa1ae741.png)
 
